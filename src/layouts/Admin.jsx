@@ -1,18 +1,18 @@
 import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
-    UploadOutlined,
     UserOutlined,
-    VideoCameraOutlined,
+    FolderOutlined
 } from '@ant-design/icons';
-import { Button, Layout, Menu } from 'antd';
+import { Layout, Menu } from 'antd';
 import Link from 'next/link';
-import React, { Children, useState } from 'react';
+import React, { useState } from 'react';
 const { Header, Sider, Content } = Layout;
-import { Table } from '../components/table/table';
+import { useRouter } from 'next/router';
 
 export default function AdminLayout({ children }) {
     const [collapsed, setCollapsed] = useState(false);
+    const router = useRouter();
     return (
         <Layout className="layout">
             <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -20,22 +20,18 @@ export default function AdminLayout({ children }) {
                 <Menu
                     theme="dark"
                     mode="inline"
-                    defaultSelectedKeys={['1']}
+                    defaultSelectedKeys={['/employee']}
+                    onClick={({ key }) => { router.push(key); }}
                     items={[
                         {
-                            key: '1',
+                            key: '/employee',
                             icon: <UserOutlined />,
                             label: 'Nhân viên',
                         },
                         {
-                            key: '2',
-                            icon: <VideoCameraOutlined />,
+                            key: '/document',
+                            icon: <FolderOutlined />,
                             label: 'Hồ sơ',
-                        },
-                        {
-                            key: '3',
-                            icon: <UploadOutlined />,
-                            label: 'Unknown',
                         },
                     ]}
                 />
@@ -67,7 +63,7 @@ export default function AdminLayout({ children }) {
                                                     className="block rounded-md bg-[#001529] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
                                                     href="/login"
                                                 >
-                                                    Hello
+                                                    Hello Giám đốc
                                                 </div>
 
                                                 <div>

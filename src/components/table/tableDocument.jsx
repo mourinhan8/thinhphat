@@ -1,3 +1,5 @@
+import { Pagination } from 'antd';
+
 export const Table = () => {
     return (
         <>
@@ -169,6 +171,9 @@ export const Table = () => {
                         </tr>
                     </tbody>
                 </table>
+            </div>
+            <div className='flex justify-center mt-2'>
+                <Pagination defaultCurrent={1} total={50} />
             </div>
         </>
     );
