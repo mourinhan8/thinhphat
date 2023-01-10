@@ -53,16 +53,17 @@ export const Table = () => {
                     <tbody className="divide-y divide-gray-200">
                         <tr>
                             <td className="sticky inset-y-0 left-0 bg-white px-4 py-2">
-                                #1
+                                1
                             </td>
                             <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
-                                #00001
+                                Lê Văn Mến
                             </td>
                             <td className="whitespace-nowrap px-4 py-2 text-gray-700">
-                                John Frusciante
+                                Culi
                             </td>
-                            <td className="whitespace-nowrap px-4 py-2 text-gray-700">john@rhcp.com</td>
-                            <td className="whitespace-nowrap px-4 py-2 text-gray-700">$783.23</td>
+                            <td className="whitespace-nowrap px-4 py-2 text-gray-700">Dọn cầu tiêu</td>
+                            <td className="whitespace-nowrap px-4 py-2 text-gray-700">Nhà vệ sinh</td>
+                            <td className="whitespace-nowrap px-4 py-2 text-gray-700">0123456789</td>
                         </tr>
                     </tbody>
                 </table>

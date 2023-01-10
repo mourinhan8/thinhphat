@@ -1,9 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useRouter } from 'next/router';
 
 export default function Home() {
-  return (
-    <>
-      <div>Vui lòng đăng nhập để tiếp tục</div>
-    </>
-  );
+  const router = useRouter();
+  useEffect(() => { router.push('/employee'); }, []);
 }
