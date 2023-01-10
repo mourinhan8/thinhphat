@@ -1,14 +1,10 @@
-import {
-    MenuFoldOutlined,
-    MenuUnfoldOutlined,
-    UserOutlined,
-    FolderOutlined
-} from '@ant-design/icons';
+import { MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined, FolderOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import Link from 'next/link';
 import React, { useState } from 'react';
 const { Header, Sider, Content } = Layout;
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 export default function AdminLayout({ children }) {
     const [collapsed, setCollapsed] = useState(false);
@@ -16,12 +12,21 @@ export default function AdminLayout({ children }) {
     return (
         <Layout className="layout">
             <Sider trigger={null} collapsible collapsed={collapsed}>
-                <div className="logo" />
+
+                <div className='flex justify-center m-2'>
+                    <div className='flex'>
+                        <Image src={'/img/logo.jpeg'} alt="logo" width={50} height={50} />
+                    </div>
+                </div>
+
+
                 <Menu
                     theme="dark"
                     mode="inline"
                     defaultSelectedKeys={['/employee']}
-                    onClick={({ key }) => { router.push(key); }}
+                    onClick={({ key }) => {
+                        router.push(key);
+                    }}
                     items={[
                         {
                             key: '/employee',
@@ -51,6 +56,10 @@ export default function AdminLayout({ children }) {
                                     className: 'trigger',
                                     onClick: () => setCollapsed(!collapsed),
                                 })}
+                            </div>
+
+                            <div>
+
                             </div>
 
                             <div className="flex flex-1 items-center justify-end md:justify-between">
