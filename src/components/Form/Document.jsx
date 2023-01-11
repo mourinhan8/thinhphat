@@ -1,5 +1,9 @@
-import { Form, Input, Button } from 'antd';
+import { Form, Input, Button, Select, InputNumber, Space, Cascader } from 'antd';
+import { SettingOutlined } from '@ant-design/icons';
 import React from 'react';
+
+const { TextArea } = Input;
+const { Option } = Select;
 
 const MyFormItemContext = React.createContext([]);
 
@@ -17,6 +21,18 @@ const MyFormItem = ({ name, ...props }) => {
     return <Form.Item name={concatName} {...props} />;
 };
 
+const selectAfter = (
+    <Select
+        defaultValue="m2"
+        style={{
+            width: 90,
+        }}
+    >
+        <Option value="m2">m2</Option>
+        <Option value="km2">km2</Option>
+    </Select>
+);
+
 export default function DocumentForm() {
     const onFinish = (value) => {
         console.log(value);
@@ -24,48 +40,64 @@ export default function DocumentForm() {
     return (
         <>
             <Form name="form_item_path" layout="vertical" onFinish={onFinish}>
-                <MyFormItemGroup prefix={['document']}>
-                    <MyFormItem name="firstName" label="Xã/phường">
+                <MyFormItemGroup prefix={['data']}>
+                    <MyFormItem name="wards" label="Xã/phường">
                         <Input />
                     </MyFormItem>
-                    <MyFormItem name="lastName" label="Tên">
+                    <MyFormItem name="document_name" label="Tên">
                         <Input />
                     </MyFormItem>
-                    <MyFormItem name="age" label="Nội dung">
+                    <MyFormItem name="content" label="Nội dung">
                         <Input />
                     </MyFormItem>
-                    <MyFormItem name="age" label="Ngày nhận">
+                    <MyFormItem name="received_date" label="Ngày nhận">
+                        <Input type='date' />
+                    </MyFormItem>
+                    <MyFormItem name="phone_number" label="Số điện thoại">
+                        <InputNumber style={{ width: '100%' }} />
+                    </MyFormItem>
+                    <MyFormItem name="page_number" label="Số tờ/thửa">
                         <Input />
                     </MyFormItem>
-                    <MyFormItem name="age" label="Số điện thoại">
+                    <MyFormItem name="current_area" label="Diện tích hiện trạng">
+                        <Space direction="vertical" style={{ width: '100%' }}>
+                            <InputNumber style={{ width: '100%' }} addonAfter={selectAfter} defaultValue={100} />
+                        </Space>
+                    </MyFormItem>
+                    <MyFormItem name="number_certificate" label="Số phát hành GCN">
                         <Input />
                     </MyFormItem>
-                    <MyFormItem name="age" label="Số tờ/thửa">
+                    <MyFormItem name="main_person" label="Xử lý chính">
+                        <Select
+                            style={{
+                                width: '100%',
+                            }}
+                            defaultValue=""
+                        >
+                            <Option value="Mến">Mến</Option>
+                        </Select>
+                    </MyFormItem>
+                    <MyFormItem name="sub_person" label="Xử lý nội nghiệp">
+                        <Select
+                            style={{
+                                width: '100%',
+                            }}
+                            defaultValue=""
+                        >
+                            <Option value="Mến">Mến</Option>
+                        </Select>
+                    </MyFormItem>
+                    <MyFormItem name="measure_date" label="Ngày đo">
+                        <Input type='date' />
+                    </MyFormItem>
+                    <MyFormItem name="appraisal_date" label="Ngày thẩm định">
+                        <Input type='date' />
+                    </MyFormItem>
+                    <MyFormItem name="appraiser" label="Cán bộ thẩm định">
                         <Input />
                     </MyFormItem>
-                    <MyFormItem name="age" label="Diện tích hiện trạng">
-                        <Input />
-                    </MyFormItem>
-                    <MyFormItem name="age" label="Số tờ/thửa">
-                        <Input />
-                    </MyFormItem>
-                    <MyFormItem name="age" label="Xử lý chính">
-                        <Input />
-                    </MyFormItem>
-                    <MyFormItem name="age" label="Xử lý nội nghiệp">
-                        <Input />
-                    </MyFormItem>
-                    <MyFormItem name="age" label="Ngày đo">
-                        <Input />
-                    </MyFormItem>
-                    <MyFormItem name="age" label="Ngày thẩm định">
-                        <Input />
-                    </MyFormItem>
-                    <MyFormItem name="age" label="Cán bộ thẩm định">
-                        <Input />
-                    </MyFormItem>
-                    <MyFormItem name="age" label="Ghi chú">
-                        <Input />
+                    <MyFormItem name="note" label="Ghi chú">
+                        <TextArea rows={4} />
                     </MyFormItem>
                 </MyFormItemGroup>
 
