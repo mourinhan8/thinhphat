@@ -1,5 +1,4 @@
-import { Form, Input, Button, Select, InputNumber, Space, Cascader } from 'antd';
-import { SettingOutlined } from '@ant-design/icons';
+import { Form, Input, Button, Select, InputNumber, Space } from 'antd';
 import React from 'react';
 import axios from 'axios';
 
@@ -21,18 +20,6 @@ const MyFormItem = ({ name, ...props }) => {
   const concatName = name !== undefined ? [...prefixPath, ...toArr(name)] : undefined;
   return <Form.Item name={concatName} {...props} />;
 };
-
-const selectAfter = (
-  <Select
-    defaultValue="m2"
-    style={{
-      width: 90,
-    }}
-  >
-    <Option value="m2">m2</Option>
-    <Option value="km2">km2</Option>
-  </Select>
-);
 
 const API = process.env.NEXT_PUBLIC_API_BACKEND;
 
@@ -70,9 +57,7 @@ export default function DocumentForm() {
             <Input />
           </MyFormItem>
           <MyFormItem name="current_area" label="Diện tích hiện trạng">
-            <Space direction="vertical" style={{ width: '100%' }}>
-              <InputNumber style={{ width: '100%' }} addonAfter={selectAfter} defaultValue={100} />
-            </Space>
+            <Input style={{ width: '100%' }} />
           </MyFormItem>
           <MyFormItem name="number_certificate" label="Số phát hành GCN">
             <Input />
@@ -98,6 +83,9 @@ export default function DocumentForm() {
             </Select>
           </MyFormItem>
           <MyFormItem name="measure_date" label="Ngày đo">
+            <Input type="date" />
+          </MyFormItem>
+          <MyFormItem name="submission_date" label="Ngày trình thẩm định">
             <Input type="date" />
           </MyFormItem>
           <MyFormItem name="appraisal_date" label="Ngày thẩm định">

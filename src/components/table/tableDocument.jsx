@@ -1,25 +1,11 @@
 import { Pagination } from 'antd';
-import axios from 'axios';
-import { useEffect } from 'react';
-
-const backend_api = process.env.NEXT_PUBLIC_API_BACKEND;
-const getAllDocument = async () => {
-  try {
-    const option = {
-      method: 'get',
-      url: `${backend_api}/document/list`,
-    };
-    const response = await axios(option);
-    console.log(response.data);
-  } catch (error) {
-    console.log(error);
-  }
-};
+import AppContext from '../../components/AppContext';
+import { useContext } from 'react';
+import moment from 'moment';
 
 export const Table = () => {
-  useEffect(() => {
-    getAllDocument();
-  }, []);
+  const { state, dispatch } = useContext(AppContext);
+  const { documentsList } = state;
   return (
     <>
       <div className="overflow-x-auto rounded-lg border border-gray-200 overflow-x-auto">
@@ -70,32 +56,54 @@ export const Table = () => {
                 <div className="flex items-center gap-2">Cán bộ thẩm định</div>
               </th>
               <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
+                <div className="flex items-center gap-2">Trạng thái</div>
+              </th>
+              <th className="whitespace-nowrap px-4 py-2 text-left font-medium text-gray-900">
                 <div className="flex items-center gap-2">Ghi chú</div>
               </th>
             </tr>
           </thead>
 
           <tbody className="divide-y divide-gray-200">
-            <tr>
-              <td className="sticky inset-y-0 left-0 bg-white px-4 py-2">#1</td>
-              <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">#00001</td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">John Frusciante</td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">john@rhcp.com</td>
-              <td className="whitespace-nowrap px-4 py-2 text-gray-700">$783.23</td>
-              <td className="whitespace-nowrap px-4 py-2">
-                <strong className="rounded bg-red-100 px-3 py-1.5 text-xs font-medium text-red-700">Cancelled</strong>
-              </td>
-              <td className="whitespace-nowrap text-center px-4 py-2 text-gray-700">1</td>
-              <td className="whitespace-nowrap text-center px-4 py-2 text-gray-700">100m2</td>
-              <td className="whitespace-nowrap text-center px-4 py-2 text-gray-700">TCDTT</td>
-              <td className="whitespace-nowrap text-center px-4 py-2 text-gray-700">Lê Văn Mến</td>
-              <td className="whitespace-nowrap text-center px-4 py-2 text-gray-700">Mến Lê</td>
-              <td className="whitespace-nowrap text-center px-4 py-2 text-gray-700">20/11/2021</td>
-              <td className="whitespace-nowrap text-center px-4 py-2 text-gray-700">10/10/2022</td>
-              <td className="whitespace-nowrap text-center px-4 py-2 text-gray-700">10/10/2022</td>
-              <td className="whitespace-nowrap text-center px-4 py-2 text-gray-700">Nguyễn Quang Huy</td>
-              <td className="whitespace-nowrap text-center px-4 py-2 text-gray-700">Không</td>
-            </tr>
+            {documentsList?.map((document, index) => {
+              return (
+                <>
+                  <tr>
+                    <td className="sticky inset-y-0 left-0 bg-white px-4 py-2">{(index += 1)}</td>
+                    <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{document.ward}</td>
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700">{document.document_name}</td>
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700">{document.content}</td>
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700">
+                      {moment(document.received_date).format('DD/MM/YYYY')}
+                    </td>
+                    <td className="whitespace-nowrap px-4 py-2 text-gray-700">{document.phone_number}</td>
+                    <td className="whitespace-nowrap text-center px-4 py-2 text-gray-700">{document.page_number}</td>
+                    <td className="whitespace-nowrap text-center px-4 py-2 text-gray-700">{document.current_area}</td>
+                    <td className="whitespace-nowrap text-center px-4 py-2 text-gray-700">
+                      {document.number_certificate}
+                    </td>
+                    <td className="whitespace-nowrap text-center px-4 py-2 text-gray-700">{document.main_person}</td>
+                    <td className="whitespace-nowrap text-center px-4 py-2 text-gray-700">{document.sub_person}</td>
+                    <td className="whitespace-nowrap text-center px-4 py-2 text-gray-700">
+                      {moment(document.measure_date).format('DD/MM/YYYY')}
+                    </td>
+                    <td className="whitespace-nowrap text-center px-4 py-2 text-gray-700">
+                      {moment(document.submission_date).format('DD/MM/YYYY')}
+                    </td>
+                    <td className="whitespace-nowrap text-center px-4 py-2 text-gray-700">
+                      {moment(document.appraisal_date).format('DD/MM/YYYY')}
+                    </td>
+                    <td className="whitespace-nowrap text-center px-4 py-2 text-gray-700">{document.appraiser}</td>
+                    <td className="whitespace-nowrap px-4 py-2">
+                      <strong className="rounded bg-red-100 px-3 py-1.5 text-xs font-medium text-red-700">
+                        {document.status}
+                      </strong>
+                    </td>
+                    <td className="whitespace-nowrap text-center px-4 py-2 text-gray-700">Không</td>
+                  </tr>
+                </>
+              );
+            })}
           </tbody>
         </table>
       </div>
