@@ -34,14 +34,14 @@ const selectAfter = (
   </Select>
 );
 
-const API = process.env.API_BACKEND;
+const API = process.env.NEXT_PUBLIC_API_BACKEND;
 
 export default function DocumentForm() {
   const onFinish = async (value) => {
     console.log(value);
     const option = {
       method: 'post',
-      url: `${process.env.API_BACKEND}/document/create`,
+      url: `${process.env.API}/document/create`,
       data: value.data,
     };
     const response = await axios(option);

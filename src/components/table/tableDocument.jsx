@@ -2,19 +2,21 @@ import { Pagination } from 'antd';
 import axios from 'axios';
 import { useEffect } from 'react';
 
+const backend_api = process.env.NEXT_PUBLIC_API_BACKEND;
+const getAllDocument = async () => {
+  try {
+    const option = {
+      method: 'get',
+      url: `${backend_api}/document/list`,
+    };
+    const response = await axios(option);
+    console.log(response.data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const Table = () => {
-  const getAllDocument = async () => {
-    try {
-      const option = {
-        method: 'get',
-        url: `${process.env.API_BACKEND}/document/list`,
-      };
-      const response = await axios(option);
-      console.log(response);
-    } catch (error) {
-      console.log(error);
-    }
-  };
   useEffect(() => {
     getAllDocument();
   }, []);
