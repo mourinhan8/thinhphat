@@ -41,7 +41,7 @@ export default function DocumentForm() {
     console.log(value);
     const option = {
       method: 'post',
-      url: `${process.env.API}/document/create`,
+      url: `${API}/document/create`,
       data: value.data,
     };
     const response = await axios(option);
