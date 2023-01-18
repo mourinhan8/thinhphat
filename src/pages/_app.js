@@ -19,19 +19,17 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
         <title>Thinh phat</title>
       </Head>
       <AppContext.Provider value={{ state, dispatch }}>
-        <SessionProvider>
-          {Component.auth ? (
-            <Auth>
-              <Layout>
+        <Layout>
+          <SessionProvider>
+            {Component.auth ? (
+              <Auth>
                 <Component {...pageProps} />
-              </Layout>
-            </Auth>
-          ) : (
-            <Layout>
+              </Auth>
+            ) : (
               <Component {...pageProps} />
-            </Layout>
-          )}
-        </SessionProvider>
+            )}
+          </SessionProvider>
+        </Layout>
       </AppContext.Provider>
     </React.Fragment>
   );
