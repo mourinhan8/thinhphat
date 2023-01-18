@@ -1,6 +1,6 @@
 import { Pagination } from 'antd';
 import AppContext from '../../components/AppContext';
-import { useContext } from 'react';
+import { Fragment, useContext } from 'react';
 import moment from 'moment';
 
 export const Table = () => {
@@ -67,7 +67,7 @@ export const Table = () => {
           <tbody className="divide-y divide-gray-200">
             {documentsList?.map((document, index) => {
               return (
-                <>
+                <Fragment key={document._id}>
                   <tr>
                     <td className="sticky inset-y-0 left-0 bg-white px-4 py-2">{(index += 1)}</td>
                     <td className="whitespace-nowrap px-4 py-2 font-medium text-gray-900">{document.ward}</td>
@@ -101,7 +101,7 @@ export const Table = () => {
                     </td>
                     <td className="whitespace-nowrap text-center px-4 py-2 text-gray-700">Không</td>
                   </tr>
-                </>
+                </Fragment>
               );
             })}
           </tbody>

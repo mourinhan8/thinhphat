@@ -18,6 +18,7 @@ export default function Admin() {
         url: `${backend_api}/document/list`,
       };
       const response = await axios(option);
+      console.log(response.headers);
       const documents = response.data.data;
       dispatch({ type: 'GET_ALL_DOCUMENTS', payload: documents });
     } catch (error) {
@@ -43,3 +44,4 @@ export default function Admin() {
 }
 
 Admin.Layout = AdminLayout;
+Admin.auth = true;
