@@ -1,14 +1,16 @@
 import { MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined, FolderOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 const { Header, Sider, Content } = Layout;
 import { useRouter } from 'next/router';
 import Image from 'next/image';
+import AppContext from '../components/AppContext';
 
 export default function AdminLayout({ children }) {
   const [collapsed, setCollapsed] = useState(false);
   const router = useRouter();
+  const { state, dispatch } = useContext(AppContext);
   return (
     <Layout className="layout">
       <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -66,15 +68,21 @@ export default function AdminLayout({ children }) {
                       <>
                         <div
                           className="block rounded-md bg-[#001529] px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
-                          href="/login"
+                          href=""
                         >
-                          Hello Giám đốc
+                          {`Xin chào ${state.user?.full_name}`}
                         </div>
 
                         <div>
                           <a
                             className="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-[#001529] transition hover:text-teal-600/75 sm:block"
-                            onClick={() => alert('bạn đã đăng xuất')}
+                            onClick={(e) => {
+                              e.preventDefault();
+                              sessionStorage.removeItem('access_token');
+                              sessionStorage.removeItem('user');
+                              router.push('/');
+                              alert('bạn đã đăng xuất');
+                            }}
                           >
                             Đăng xuất
                           </a>

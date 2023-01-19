@@ -5,7 +5,6 @@ import { useReducer, useEffect } from 'react';
 import AppContext from '../components/AppContext';
 import Head from 'next/head';
 import React from 'react';
-import { SessionProvider, useSession, signIn } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
 export default function App({ Component, pageProps: { session, ...pageProps } }) {
@@ -20,15 +19,13 @@ export default function App({ Component, pageProps: { session, ...pageProps } })
       </Head>
       <AppContext.Provider value={{ state, dispatch }}>
         <Layout>
-          <SessionProvider>
-            {Component.auth ? (
-              <Auth>
-                <Component {...pageProps} />
-              </Auth>
-            ) : (
+          {Component.auth ? (
+            <Auth>
               <Component {...pageProps} />
-            )}
-          </SessionProvider>
+            </Auth>
+          ) : (
+            <Component {...pageProps} />
+          )}
         </Layout>
       </AppContext.Provider>
     </React.Fragment>

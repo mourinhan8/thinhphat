@@ -8,7 +8,7 @@ export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  //const { state, dispatch } = useContext(AppContext);
+  const { state, dispatch } = useContext(AppContext);
 
   useEffect(() => {
     // redirect to home if already logged in
@@ -30,6 +30,7 @@ export default function Login() {
       });
       sessionStorage.setItem('access_token', `Bearer ${response.headers.authorization}`);
       sessionStorage.setItem('user', response.data.user.username);
+      dispatch({ type: 'USER_LOGIN', payload: response.data.user });
       router.push('/');
     } catch (error) {
       alert(error);
