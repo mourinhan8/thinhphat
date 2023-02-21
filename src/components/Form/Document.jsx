@@ -25,7 +25,7 @@ const API = process.env.NEXT_PUBLIC_API_BACKEND;
 
 export default function DocumentForm() {
   const onFinish = async (value) => {
-    console.log(value);
+    //console.log(value);
     const option = {
       method: 'post',
       url: `${API}/document/create`,
